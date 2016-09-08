@@ -1,3 +1,5 @@
+/*
+
 package com.example.patrick.bateria_back_arquivo;
 
 import android.app.Service;
@@ -32,7 +34,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Locale;
 
 import static android.widget.Toast.LENGTH_LONG;
 import static java.lang.Thread.sleep;
@@ -53,7 +54,6 @@ public class MyServiceSemThread extends Service{
     private Calendar rightNow = Calendar.getInstance();
 
     final Handler handler = new Handler();
-    final AquisicaoSensores info = new AquisicaoSensores(this);
 
     Runnable runnableCode;
 
@@ -75,14 +75,12 @@ public class MyServiceSemThread extends Service{
             @Override
             public void run() {
 
-                Calendar calendario = Calendar.getInstance();
-
                 File arquivo = new File(Environment.getExternalStorageDirectory().toString() + "/teste.txt");
 
                 try {
                     FileWriter escritor = new FileWriter(arquivo, true);
 
-                    escritor.write("\n\nTempo atual: " + calendario.get(Calendar.HOUR) + ":" + calendario.get(Calendar.MINUTE) + ":" + calendario.get(Calendar.SECOND) + "," + calendario.get(Calendar.MILLISECOND) + "\n" + info.getInfo());
+                    escritor.write("\n" + contador);
 
 
                     escritor.close();
@@ -90,7 +88,7 @@ public class MyServiceSemThread extends Service{
                     e.printStackTrace();
                 }
 
-                if(contador++<10) handler.postDelayed(this, 10000);
+                if(contador++<10) handler.postDelayed(this, 2000);
             }
         };
 
@@ -108,4 +106,4 @@ public class MyServiceSemThread extends Service{
 
     }
 
-}
+}*/

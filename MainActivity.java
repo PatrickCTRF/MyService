@@ -20,9 +20,12 @@ import android.view.View;
 
 public class MainActivity extends Activity {
 
+    Bundle savedInstanceState2;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Bundle savedInstanceState2 = savedInstanceState;
         setContentView(R.layout.activity_main);
     }
 

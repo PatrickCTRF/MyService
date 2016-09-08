@@ -51,12 +51,7 @@ public class MyService extends Service{
     private boolean pegouDado = false;
     private Calendar rightNow = Calendar.getInstance();
 
-    final Handler handler = new Handler();
-    File arquivo = new File(Environment.getExternalStorageDirectory().toString() + "/teste.txt");
-
-
-
-    Runnable runnableCode;
+    private ThreadAuxiliar servico;
 
     @Override
     public IBinder onBind(Intent arg0) {
@@ -70,35 +65,17 @@ public class MyService extends Service{
 
         Toast.makeText(this, "Service Started", LENGTH_LONG).show();
 
-        runnableCode = new Runnable() {
+        servico = new ThreadAuxiliar();
 
-            private int contador = 0;
+        servico.start();
 
-            @Override
-            public void run() {
-
-                try {
-                    finalEscritor.write("\n" + contador);
-
-                    finalEscritor.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                if(contador++<10) handler.postDelayed(this, 2000);
-            }
-        };
-
-        handler.post(runnableCode);
-
-        return START_STICKY;
+        return START_NOT_STICKY;
     }
 
     @Override
     public void onDestroy() {
 
         super.onDestroy();
-        handler.removeCallbacks(runnableCode);
         Toast.makeText(this, "Service Destroyed", LENGTH_LONG).show();
 
     }
